@@ -1,0 +1,1789 @@
+<!DOCTYPE html>
+<!-- 
+    INSTRUCTIONS FOR ADDING IMAGES:
+    Place your 5 images in the same folder as this HTML file
+    Name them: image1.jpg, image2.jpg, image3.jpg, image4.jpg, image5.jpg
+    (or update the src attributes in the slideshow section to match your image names)
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Happy Birthday & Valentine's Day Chevi! 💕</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@400;600;700&family=Courier+Prime:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            min-height: 100vh;
+            min-height: 100dvh; /* Dynamic viewport height for mobile */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            overflow-y: auto;
+            position: relative;
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        }
+
+        /* Animated Gradient Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab, #ff6b9d, #c44569);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            z-index: -2;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .animated-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(255, 107, 157, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(196, 69, 105, 0.3) 0%, transparent 50%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
+        }
+
+        /* Particle System */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: particleFloat 20s infinite;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Floating hearts animation */
+        .heart {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 24px;
+            animation: floatHeart 8s ease-in-out infinite;
+            pointer-events: none;
+            filter: drop-shadow(0 0 10px rgba(255, 107, 157, 0.8));
+        }
+
+        @keyframes floatHeart {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg) scale(1);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-50vh) rotate(180deg) scale(1.2);
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg) scale(0.8);
+                opacity: 0;
+            }
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #ff6b9d;
+            position: absolute;
+            animation: confettiFall 3s linear infinite;
+            z-index: 1001;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Game Container */
+        .game-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px); /* Safari support */
+            border-radius: 30px;
+            padding: 50px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5),
+                        0 0 0 1px rgba(255, 255, 255, 0.1),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            text-align: center;
+            max-width: 650px;
+            width: 90%;
+            max-width: min(650px, 90vw); /* Responsive max-width */
+            display: block;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            animation: containerGlow 3s ease-in-out infinite;
+            position: relative;
+            z-index: 100;
+            margin: 20px auto; /* Center with margin */
+        }
+
+        @keyframes containerGlow {
+            0%, 100% {
+                box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5),
+                            0 0 0 1px rgba(255, 255, 255, 0.1),
+                            inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                            0 0 50px rgba(255, 107, 157, 0.3);
+            }
+            50% {
+                box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5),
+                            0 0 0 1px rgba(255, 255, 255, 0.1),
+                            inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                            0 0 80px rgba(255, 107, 157, 0.6);
+            }
+        }
+
+        .game-container.hidden {
+            display: none;
+        }
+
+        h1 {
+            color: #fff;
+            margin-bottom: 30px;
+            font-size: 3em;
+            text-shadow: 0 0 20px rgba(255, 107, 157, 0.8),
+                         0 0 40px rgba(255, 107, 157, 0.5),
+                         2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-weight: 700;
+            letter-spacing: 2px;
+            animation: titlePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes titlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .game-instructions {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 30px;
+            font-size: 1.2em;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Catch Hearts Game */
+        .catch-game {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            margin: 30px 0;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .basket {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 4em;
+            cursor: pointer;
+            transition: transform 0.1s;
+            z-index: 100;
+            filter: drop-shadow(0 0 15px rgba(255, 107, 157, 0.8));
+        }
+
+        .basket:hover {
+            transform: translateX(-50%) scale(1.1);
+        }
+
+        .falling-heart {
+            position: absolute;
+            font-size: 2.5em;
+            pointer-events: none;
+            animation: fallDown 3s linear;
+            filter: drop-shadow(0 0 10px rgba(255, 107, 157, 0.6));
+            z-index: 50;
+        }
+
+        @keyframes fallDown {
+            0% {
+                transform: translateY(-50px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(450px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .caught-heart {
+            animation: caughtAnimation 0.5s ease-out forwards;
+        }
+
+        @keyframes caughtAnimation {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.5);
+            }
+            100% {
+                transform: scale(0) translateY(-20px);
+                opacity: 0;
+            }
+        }
+
+        .game-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 25px;
+            font-size: 1.2em;
+            color: #fff;
+            font-weight: 600;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .game-stats span {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Birthday Popup */
+        .birthday-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.5s;
+        }
+
+        .birthday-popup.show {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .popup-content {
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.95), rgba(196, 69, 105, 0.95));
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px); /* Safari support */
+            padding: 80px 50px;
+            border-radius: 30px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 30px 100px rgba(0, 0, 0, 0.7),
+                        0 0 0 1px rgba(255, 255, 255, 0.2),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            animation: popIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            max-width: 600px;
+            width: 90%;
+            max-width: min(600px, 90vw); /* Responsive max-width */
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0.3) rotate(-10deg);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1) rotate(5deg);
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        .popup-content h2 {
+            font-size: 4em;
+            margin-bottom: 30px;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.8),
+                         0 0 60px rgba(255, 255, 255, 0.5),
+                         3px 3px 6px rgba(0, 0, 0, 0.3);
+            animation: bounce 1.5s ease-in-out infinite, glow 2s ease-in-out infinite;
+            font-weight: 700;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-15px) scale(1.05); }
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 30px rgba(255, 255, 255, 0.8), 0 0 60px rgba(255, 255, 255, 0.5); }
+            50% { text-shadow: 0 0 50px rgba(255, 255, 255, 1), 0 0 100px rgba(255, 255, 255, 0.8); }
+        }
+
+        /* Letter Container */
+        .letter-container {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px); /* Safari support */
+            border-radius: 30px;
+            padding: 50px;
+            box-shadow: 0 30px 100px rgba(0, 0, 0, 0.5),
+                        0 0 0 1px rgba(255, 255, 255, 0.2);
+            max-width: 800px;
+            width: 90%;
+            max-width: min(800px, 90vw); /* Responsive max-width */
+            margin: 20px auto;
+            max-height: 90vh;
+            max-height: 90dvh; /* Dynamic viewport height */
+            overflow-y: auto;
+            border: 2px solid rgba(255, 107, 157, 0.3);
+        }
+
+        .letter-container.show {
+            display: block;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .letter-container h1 {
+            color: #c44569;
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #ff6b9d, #c44569);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .letter-content {
+            font-family: 'Courier Prime', 'Courier New', monospace;
+            font-size: 1.15em;
+            line-height: 2.2;
+            color: #333;
+            min-height: 300px;
+            white-space: pre-wrap;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+            word-spacing: 2px;
+        }
+
+        .letter-content .typing {
+            border-right: 3px solid #c44569;
+            animation: blink 1s infinite;
+            padding-right: 2px;
+        }
+
+        @keyframes blink {
+            0%, 50% { border-color: #c44569; opacity: 1; }
+            51%, 100% { border-color: transparent; opacity: 0.3; }
+        }
+
+        /* 3D Card Flip Slideshow */
+        .slideshow-container {
+            display: none;
+            max-width: 1000px;
+            width: 95%;
+            max-width: min(1000px, 95vw); /* Responsive max-width */
+            margin: 20px auto;
+            position: relative;
+            perspective: 1200px;
+        }
+
+        .slideshow-container.show {
+            display: block;
+            animation: fadeIn 0.8s;
+        }
+
+        .slide-wrapper {
+            position: relative;
+            width: 100%;
+            height: 85vh;
+            height: 85dvh; /* Dynamic viewport height */
+            perspective: 1200px;
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        .slide-card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.8s;
+            cursor: pointer;
+        }
+
+        .slide-card:hover {
+            transform: rotateY(5deg) rotateX(5deg) scale(1.02);
+        }
+
+        .slide-card-front,
+        .slide-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .slide-card-back {
+            transform: rotateY(180deg);
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.95), rgba(196, 69, 105, 0.95));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2em;
+            text-align: center;
+            padding: 40px;
+            backdrop-filter: blur(20px);
+        }
+
+        .slide-card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            border-radius: 25px;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            pointer-events: none; /* Prevent image dragging on mobile */
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .slide img[src]:not([src=""]) {
+            opacity: 1;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.3), rgba(196, 69, 105, 0.3));
+            color: #fff;
+            font-size: 1.5em;
+            border-radius: 25px;
+        }
+
+        .slideshow-controls {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .prev, .next {
+            background: rgba(255, 255, 255, 0.95);
+            color: #c44569;
+            border: none;
+            padding: 18px 28px;
+            font-size: 1.5em;
+            border-radius: 50%;
+            cursor: pointer;
+            margin: 0 15px;
+            transition: all 0.3s;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px); /* Safari support */
+            border: 2px solid rgba(255, 107, 157, 0.3);
+            -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+            touch-action: manipulation; /* Improve touch response */
+        }
+
+        .prev:hover, .next:hover {
+            background: linear-gradient(135deg, #ff6b9d, #c44569);
+            color: white;
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 12px 35px rgba(196, 69, 105, 0.6);
+        }
+
+        .slide-indicator {
+            text-align: center;
+            margin-top: 20px;
+            color: #fff;
+            font-size: 1.3em;
+            font-weight: bold;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5),
+                         0 0 20px rgba(255, 107, 157, 0.8);
+        }
+
+        /* Outro Section - Beautiful & Unique */
+        .outro-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.95), rgba(196, 69, 105, 0.95), rgba(255, 107, 157, 0.95));
+            background-size: 400% 400%;
+            animation: outroGradient 8s ease infinite;
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        @keyframes outroGradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .outro-container.show {
+            display: flex;
+            animation: outroFadeIn 1s ease-out;
+        }
+
+        @keyframes outroFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .outro-content {
+            text-align: center;
+            color: white;
+            max-width: 900px;
+            max-width: min(900px, 90vw); /* Responsive max-width */
+            padding: 80px 60px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px); /* Safari support */
+            border-radius: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 30px 100px rgba(0, 0, 0, 0.4),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            position: relative;
+            overflow: hidden;
+            animation: outroContentSlide 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes outroContentSlide {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9) rotate(-2deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1) rotate(0deg);
+            }
+        }
+
+        .outro-content::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: outroShine 4s ease-in-out infinite;
+        }
+
+        @keyframes outroShine {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+        }
+
+        .outro-name {
+            font-family: 'Dancing Script', cursive;
+            font-size: 5.5em;
+            margin-bottom: 20px;
+            color: #000000;
+            animation: nameFloat 3s ease-in-out infinite;
+            font-weight: 700;
+            text-shadow: 0 0 40px rgba(255, 255, 255, 0.5);
+            position: relative;
+            z-index: 2;
+            letter-spacing: 3px;
+        }
+
+        @keyframes nameGradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes nameFloat {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-8px) scale(1.02); }
+        }
+
+        .outro-main-heart {
+            font-size: 6em;
+            margin: 20px 0 40px 0;
+            animation: mainHeartBeat 1.8s ease-in-out infinite;
+            display: inline-block;
+            filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.8)) brightness(0);
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes mainHeartBeat {
+            0%, 100% { 
+                transform: scale(1) rotate(0deg);
+                filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.8));
+            }
+            25% { 
+                transform: scale(1.25) rotate(-5deg);
+                filter: drop-shadow(0 0 50px rgba(255, 255, 255, 1));
+            }
+            50% { 
+                transform: scale(1.15) rotate(5deg);
+                filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.9));
+            }
+            75% { 
+                transform: scale(1.2) rotate(-3deg);
+                filter: drop-shadow(0 0 45px rgba(255, 255, 255, 0.95));
+            }
+        }
+
+        .outro-message {
+            font-size: 1.5em;
+            line-height: 2.2;
+            margin: 30px 0;
+            opacity: 0;
+            animation: messageSlideIn 1.2s ease-out 0.8s forwards;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            position: relative;
+            z-index: 2;
+            color: #000000;
+            text-shadow: 0 2px 20px rgba(255, 255, 255, 0.5);
+        }
+
+        @keyframes messageSlideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .outro-message-line {
+            display: block;
+            margin: 15px 0;
+            opacity: 0;
+            animation: lineFadeIn 0.8s ease-out forwards;
+        }
+
+        .outro-message-line:nth-child(1) { animation-delay: 1s; }
+        .outro-message-line:nth-child(2) { animation-delay: 1.3s; }
+        .outro-message-line:nth-child(3) { animation-delay: 1.6s; }
+        .outro-message-line:nth-child(4) { animation-delay: 1.9s; }
+        .outro-message-line:nth-child(5) { animation-delay: 2.2s; }
+        .outro-message-line:nth-child(6) { animation-delay: 2.5s; }
+        .outro-message-line:nth-child(7) { animation-delay: 2.8s; }
+        .outro-message-line:nth-child(8) { animation-delay: 3.1s; }
+
+        @keyframes lineFadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .outro-final {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3em;
+            margin-top: 50px;
+            opacity: 0;
+            animation: finalSlideIn 1s ease-out 3.5s forwards;
+            color: #000000;
+            text-shadow: 0 0 40px rgba(255, 255, 255, 0.6);
+            position: relative;
+            z-index: 2;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        @keyframes finalSlideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px) scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .floating-hearts-outro {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .outro-heart-particle {
+            position: absolute;
+            font-size: 2em;
+            opacity: 0.7;
+            animation: heartFloat 8s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.6));
+        }
+
+        @keyframes heartFloat {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg) scale(0.5);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px) rotate(360deg) scale(1);
+                opacity: 0;
+            }
+        }
+
+        button {
+            background: linear-gradient(135deg, #ff6b9d, #c44569);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.3em;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 25px;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(196, 69, 105, 0.4);
+            font-weight: 600;
+            letter-spacing: 1px;
+            -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+            touch-action: manipulation; /* Improve touch response */
+        }
+
+        button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(196, 69, 105, 0.6);
+        }
+
+        button:active {
+            transform: translateY(-1px) scale(1.02);
+        }
+
+        /* Scrollbar Styling */
+        .letter-container::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .letter-container::-webkit-scrollbar-track {
+            background: rgba(255, 107, 157, 0.1);
+            border-radius: 10px;
+        }
+
+        .letter-container::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #ff6b9d, #c44569);
+            border-radius: 10px;
+        }
+
+        /* Tablet and Medium Devices */
+        @media (max-width: 1024px) {
+            .game-container {
+                max-width: 90%;
+                padding: 40px 30px;
+            }
+
+            .slide-wrapper {
+                height: 75vh;
+            }
+
+            .outro-content {
+                max-width: 85%;
+                padding: 60px 50px;
+            }
+
+            .letter-container {
+                max-width: 90%;
+                padding: 40px 30px;
+            }
+        }
+
+        /* Small Tablets and Large Phones */
+        @media (max-width: 768px) {
+            .game-container {
+                padding: 35px 25px;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            .game-instructions {
+                font-size: 1.1em;
+            }
+
+            .catch-game {
+                height: 350px;
+            }
+
+            .slide-wrapper {
+                height: 70vh;
+            }
+
+            .popup-content {
+                padding: 60px 40px;
+            }
+
+            .popup-content h2 {
+                font-size: 3em;
+            }
+
+            .letter-content {
+                font-size: 1.05em;
+            }
+
+            .outro-name {
+                font-size: 4em;
+            }
+
+            .outro-message {
+                font-size: 1.2em;
+            }
+
+            .outro-final {
+                font-size: 2.5em;
+            }
+
+            .outro-content {
+                padding: 50px 40px;
+            }
+
+            .prev, .next {
+                padding: 15px 25px;
+                font-size: 1.3em;
+            }
+        }
+
+        /* Mobile Devices */
+        @media (max-width: 600px) {
+            .game-container {
+                padding: 25px 15px;
+                border-radius: 20px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+                margin-bottom: 20px;
+            }
+
+            .game-instructions {
+                font-size: 1em;
+                margin-bottom: 20px;
+            }
+
+            .catch-game {
+                height: 300px;
+                margin: 20px 0;
+            }
+            
+            .basket {
+                font-size: 3em;
+            }
+
+            .game-stats {
+                font-size: 1em;
+                margin-top: 15px;
+            }
+
+            .game-stats span {
+                padding: 6px 15px;
+            }
+
+            .popup-content {
+                padding: 50px 30px;
+                border-radius: 20px;
+            }
+            
+            .popup-content h2 {
+                font-size: 2em;
+                margin-bottom: 20px;
+            }
+
+            .popup-content p {
+                font-size: 1.3em;
+                margin-top: 20px;
+            }
+
+            button {
+                padding: 15px 30px;
+                font-size: 1.1em;
+                margin-top: 20px;
+            }
+
+            .letter-container {
+                padding: 30px 20px;
+                border-radius: 20px;
+                margin: 10px auto;
+            }
+
+            .letter-container h1 {
+                font-size: 2em;
+                margin-bottom: 25px;
+            }
+
+            .letter-content {
+                font-size: 0.95em;
+                line-height: 2;
+            }
+
+            .slideshow-container {
+                width: 98%;
+                margin: 10px auto;
+            }
+
+            .slide-wrapper {
+                height: 60vh;
+            }
+
+            .slide-card-front,
+            .slide-card-back {
+                border-radius: 15px;
+            }
+
+            .slide img {
+                border-radius: 15px;
+            }
+
+            .slideshow-controls {
+                margin-top: 15px;
+            }
+
+            .prev, .next {
+                padding: 12px 20px;
+                font-size: 1.2em;
+                margin: 0 10px;
+            }
+
+            .slide-indicator {
+                font-size: 1.1em;
+                margin-top: 15px;
+            }
+
+            .outro-container {
+                padding: 0;
+            }
+
+            .outro-content {
+                padding: 40px 25px;
+                border-radius: 25px;
+                max-width: 95%;
+            }
+
+            .outro-name {
+                font-size: 2.5em;
+                margin-bottom: 15px;
+            }
+
+            .outro-main-heart {
+                font-size: 3.5em;
+                margin: 15px 0 30px 0;
+            }
+
+            .outro-message {
+                font-size: 1em;
+                line-height: 1.8;
+                margin: 20px 0;
+            }
+
+            .outro-message-line {
+                margin: 10px 0;
+            }
+
+            .outro-final {
+                font-size: 1.5em;
+                margin-top: 30px;
+            }
+        }
+
+        /* Small Mobile Devices */
+        @media (max-width: 400px) {
+            .game-container {
+                padding: 20px 12px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .game-instructions {
+                font-size: 0.9em;
+            }
+
+            .catch-game {
+                height: 250px;
+            }
+
+            .basket {
+                font-size: 2.5em;
+            }
+
+            .popup-content {
+                padding: 40px 20px;
+            }
+
+            .popup-content h2 {
+                font-size: 1.7em;
+            }
+
+            .popup-content p {
+                font-size: 1.1em;
+            }
+
+            .letter-container {
+                padding: 25px 15px;
+            }
+
+            .letter-container h1 {
+                font-size: 1.7em;
+            }
+
+            .letter-content {
+                font-size: 0.85em;
+            }
+
+            .slide-wrapper {
+                height: 55vh;
+            }
+
+            .outro-content {
+                padding: 30px 20px;
+            }
+
+            .outro-name {
+                font-size: 2em;
+            }
+
+            .outro-main-heart {
+                font-size: 3em;
+            }
+
+            .outro-message {
+                font-size: 0.9em;
+            }
+
+            .outro-final {
+                font-size: 1.3em;
+            }
+
+            .prev, .next {
+                padding: 10px 18px;
+                font-size: 1.1em;
+            }
+        }
+
+        /* Landscape Orientation on Mobile */
+        @media (max-width: 900px) and (orientation: landscape) {
+            .slide-wrapper {
+                height: 85vh;
+            }
+
+            .catch-game {
+                height: 250px;
+            }
+
+            .game-container {
+                padding: 25px 20px;
+            }
+
+            .outro-content {
+                padding: 30px 40px;
+            }
+        }
+
+        /* Very Large Screens */
+        @media (min-width: 1400px) {
+            .game-container {
+                max-width: 700px;
+            }
+
+            .letter-container {
+                max-width: 900px;
+            }
+
+            .slideshow-container {
+                max-width: 1200px;
+            }
+
+            .outro-content {
+                max-width: 1000px;
+            }
+        }
+
+        /* Touch Device Optimizations */
+        @media (hover: none) and (pointer: coarse) {
+            button {
+                min-height: 48px;
+                min-width: 48px;
+            }
+
+            .prev, .next {
+                min-height: 48px;
+                min-width: 48px;
+            }
+
+            .basket {
+                font-size: 3.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+    
+    <!-- Particle System -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Floating Hearts -->
+    <div id="hearts-container"></div>
+
+    <!-- Game Container -->
+    <div class="game-container" id="gameContainer">
+        <h1>🎮 Mini Game 🎮</h1>
+        <p class="game-instructions">Catch 10 hearts to unlock your special message! 💕<br>Move your mouse to catch the falling hearts!</p>
+        <div class="game-stats">
+            <div>Caught: <span id="caught">0</span>/10</div>
+        </div>
+        <div class="catch-game" id="catchGame">
+            <div class="basket" id="basket">🧺</div>
+        </div>
+    </div>
+
+    <!-- Background Music -->
+    <iframe id="backgroundMusic" width="0" height="0" frameborder="0" allow="autoplay; encrypted-media" style="display: none;"></iframe>
+
+    <!-- Birthday Popup -->
+    <div class="birthday-popup" id="birthdayPopup">
+        <div class="popup-content">
+            <h2>🎉 HAPPY BIRTHDAY CHEVI! 💕</h2>
+            <p style="font-size: 1.8em; margin-top: 30px; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);">You did it! Now let's celebrate! 🎂✨</p>
+            <button onclick="closePopup()">Continue</button>
+        </div>
+    </div>
+
+    <!-- Letter Container -->
+    <div class="letter-container" id="letterContainer">
+        <h1>💌 A Special Message 💌</h1>
+        <div class="letter-content" id="letterContent"></div>
+    </div>
+
+    <!-- Slideshow Container with 3D Card Flip -->
+    <div class="slideshow-container" id="slideshowContainer">
+        <div class="slide-wrapper">
+            <div class="slide active">
+                <div class="slide-card" onclick="flipSlideCard(this)">
+                    <div class="slide-card-front">
+                        <img id="slide1" src="image1.jpg.png.png" alt="Memory 1" loading="eager" onerror="showPlaceholder(this, 1)" onload="this.style.opacity=1">
+                    </div>
+                    <div class="slide-card-back">
+                        <div>💕<br>Memory 1<br>💕</div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slide-card" onclick="flipSlideCard(this)">
+                    <div class="slide-card-front">
+                        <img id="slide2" src="image2.jpg.png.png" alt="Memory 2" loading="eager" onerror="showPlaceholder(this, 2)" onload="this.style.opacity=1">
+                    </div>
+                    <div class="slide-card-back">
+                        <div>💖<br>Memory 2<br>💖</div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slide-card" onclick="flipSlideCard(this)">
+                    <div class="slide-card-front">
+                        <img id="slide3" src="image3.jpg.png.png" alt="Memory 3" loading="eager" onerror="showPlaceholder(this, 3)" onload="this.style.opacity=1">
+                    </div>
+                    <div class="slide-card-back">
+                        <div>💗<br>Memory 3<br>💗</div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slide-card" onclick="flipSlideCard(this)">
+                    <div class="slide-card-front">
+                        <img id="slide4" src="image4.jpg.png.png" alt="Memory 4" loading="eager" onerror="showPlaceholder(this, 4)" onload="this.style.opacity=1">
+                    </div>
+                    <div class="slide-card-back">
+                        <div>💝<br>Memory 4<br>💝</div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slide-card" onclick="flipSlideCard(this)">
+                    <div class="slide-card-front">
+                        <img id="slide5" src="image5.jpg.png.png" alt="Memory 5" loading="eager" onerror="showPlaceholder(this, 5)" onload="this.style.opacity=1">
+                    </div>
+                    <div class="slide-card-back">
+                        <div>❤️<br>Memory 5<br>❤️</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slideshow-controls">
+            <button class="prev" onclick="changeSlideWithPause(-1)">❮</button>
+            <button class="next" onclick="changeSlideWithPause(1)">❯</button>
+        </div>
+        <div class="slide-indicator">
+            <span id="slideNumber">1</span> / <span id="totalSlides">5</span>
+        </div>
+    </div>
+
+    <!-- Outro Section -->
+    <div class="outro-container" id="outroContainer">
+        <div class="floating-hearts-outro" id="outroHearts"></div>
+        <div class="outro-content">
+            <div class="outro-name">Chevi</div>
+            <div class="outro-main-heart">🖤</div>
+            <div class="outro-message">
+                <span class="outro-message-line">I know I don't always say it out loud,</span>
+                <span class="outro-message-line">but having you in my life has been one of the best things.</span>
+                <span class="outro-message-line">Those random conversations at weird hours,</span>
+                <span class="outro-message-line">the way you make me laugh even when things are tough,</span>
+                <span class="outro-message-line">and just... being able to be myself around you.</span>
+                <span class="outro-message-line">That means everything to me.</span>
+                <span class="outro-message-line">I hope you know how much you matter.</span>
+                <span class="outro-message-line">Not just today, but every single day.</span>
+            </div>
+            <div class="outro-final">
+                Happy Birthday, Chevi.<br>
+                Here's to another year of being amazing. 🖤
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Background Music
+        function startMusic() {
+            // Load and play music when letter appears (after user interaction)
+            const musicFrame = document.getElementById('backgroundMusic');
+            if (musicFrame && !musicFrame.src.includes('youtube.com')) {
+                // Set the YouTube embed URL with autoplay
+                musicFrame.src = 'https://www.youtube.com/embed/zTvsuIwrMLg?autoplay=1&loop=1&playlist=zTvsuIwrMLg&controls=0&mute=0&enablejsapi=1';
+            }
+        }
+
+        // Create particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                particle.style.width = particle.style.height = (Math.random() * 4 + 2) + 'px';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Create floating hearts
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts-container');
+            const hearts = ['💕', '💖', '💗', '💝', '❤️', '💓', '💞', '🎂', '✨', '🌟'];
+            
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                heart.style.fontSize = (Math.random() * 15 + 20) + 'px';
+                heartsContainer.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 10000);
+            }, 400);
+        }
+
+        // Create hearts for outro
+        function createOutroHearts() {
+            const heartsContainer = document.getElementById('outroHearts');
+            const hearts = ['🖤', '💕', '💖', '💗', '💝', '❤️', '💓', '💞', '✨', '🌟'];
+            
+            // Create continuous floating hearts
+            function createHeart() {
+                const heart = document.createElement('div');
+                heart.className = 'outro-heart-particle';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (Math.random() * 6 + 8) + 's';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                heart.style.fontSize = (Math.random() * 15 + 20) + 'px';
+                heartsContainer.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 10000);
+            }
+            
+            // Create initial hearts
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => createHeart(), i * 300);
+            }
+            
+            // Continue creating hearts
+            setInterval(() => {
+                createHeart();
+            }, 800);
+        }
+
+        // Create confetti
+        function createConfetti() {
+            const colors = ['#ff6b9d', '#c44569', '#ffd700', '#ff69b4', '#ff1493', '#ff6347'];
+            const confettiCount = 100;
+            
+            for (let i = 0; i < confettiCount; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.width = (Math.random() * 8 + 5) + 'px';
+                    confetti.style.height = (Math.random() * 8 + 5) + 'px';
+                    confetti.style.animationDelay = Math.random() * 3 + 's';
+                    confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 5000);
+                }, i * 30);
+            }
+        }
+
+        // Catch Hearts Game
+        let caughtCount = 0;
+        let gameActive = true;
+        const hearts = ['💕', '💖', '💗', '💝', '❤️', '💓', '💞', '🎂', '✨', '🌟'];
+        let heartInterval;
+        let basketPosition = 50; // percentage
+
+        function createGame() {
+            const basket = document.getElementById('basket');
+            const gameArea = document.getElementById('catchGame');
+            
+            // Move basket with mouse
+            gameArea.addEventListener('mousemove', (e) => {
+                const rect = gameArea.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                basketPosition = (x / rect.width) * 100;
+                basket.style.left = basketPosition + '%';
+            });
+
+            // Touch support for mobile
+            gameArea.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                const rect = gameArea.getBoundingClientRect();
+                const touch = e.touches[0];
+                const x = touch.clientX - rect.left;
+                basketPosition = (x / rect.width) * 100;
+                basket.style.left = basketPosition + '%';
+            });
+
+            // Start dropping hearts
+            heartInterval = setInterval(() => {
+                if (!gameActive) return;
+                createFallingHeart();
+            }, 800);
+        }
+
+        function createFallingHeart() {
+            const gameArea = document.getElementById('catchGame');
+            const heart = document.createElement('div');
+            heart.className = 'falling-heart';
+            heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+            heart.style.left = Math.random() * 90 + 5 + '%';
+            heart.style.animationDuration = (Math.random() * 1 + 2.5) + 's';
+            gameArea.appendChild(heart);
+
+            // Check collision
+            const checkCollision = setInterval(() => {
+                const heartRect = heart.getBoundingClientRect();
+                const basketRect = document.getElementById('basket').getBoundingClientRect();
+                
+                if (heartRect.bottom >= basketRect.top && 
+                    heartRect.left < basketRect.right && 
+                    heartRect.right > basketRect.left &&
+                    !heart.classList.contains('caught-heart')) {
+                    heart.classList.add('caught-heart');
+                    caughtCount++;
+                    document.getElementById('caught').textContent = caughtCount;
+                    
+                    clearInterval(checkCollision);
+                    setTimeout(() => heart.remove(), 500);
+                    
+                    if (caughtCount >= 10) {
+                        gameActive = false;
+                        clearInterval(heartInterval);
+                        setTimeout(() => {
+                            createConfetti();
+                            showBirthdayPopup();
+                        }, 500);
+                    }
+                }
+            }, 50);
+
+            // Remove heart if it reaches bottom
+            setTimeout(() => {
+                if (!heart.classList.contains('caught-heart')) {
+                    heart.remove();
+                    clearInterval(checkCollision);
+                }
+            }, 3500);
+        }
+
+        function showBirthdayPopup() {
+            document.getElementById('birthdayPopup').classList.add('show');
+        }
+
+        function closePopup() {
+            document.getElementById('birthdayPopup').classList.remove('show');
+            setTimeout(() => {
+                showLetter();
+            }, 300);
+        }
+
+        // Typewriter effect for letter
+        const letterText = `Dear Chevi,
+
+
+
+Happy Birthday and Happy Valentine's Day!
+
+
+
+I know today is extra special, so I wanted to make something small but meaningful for you — just a little surprise to show how much you matter to me as a friend.
+
+
+
+Honestly, I don't say this enough, but I'm really thankful for you. Thank you for all the random talks, late replies, silly jokes, shared stress, shared laughs, and even the quiet moments when we didn't really need to talk at all. Somehow, your presence alone already makes things feel lighter.
+
+
+
+You have this way of making people feel comfortable just by being yourself. You're kind without trying, funny without forcing it, and genuine in a way that's actually rare these days. Being your friend has been one of those unexpected good things in my life.
+
+
+
+I also want you to know how much I admire your strength — even on the days you pretend you're fine or laugh things off. You handle more than people realize, and you still manage to show up with a smile. That's something I really respect about you.
+
+
+
+These pictures you're about to see are just tiny reminders of the memories we've shared so far. Simple moments, maybe — but they mean a lot to me. I hope they bring back good laughs, small stories, and that familiar feeling of "hey, that was a really nice day."
+
+
+
+I hope this new year of your life brings you calmer days, better news, deeper happiness, and a lot more moments that make you genuinely proud of yourself. You deserve good things, Chevi. You really do.
+
+
+
+Thank you for being you.
+
+Thank you for being someone I can be comfortable with.
+
+Thank you for being such a special part of my life — not as anything complicated, just as a very important friend.
+
+
+
+I'm really grateful to have you in my life, Chevi.
+
+Never forget how special you are — not just today, but always.
+
+
+
+Happy birthday.
+
+Your very lucky friend 🖤`;
+
+        function showLetter() {
+            document.getElementById('gameContainer').classList.add('hidden');
+            const letterContainer = document.getElementById('letterContainer');
+            letterContainer.classList.add('show');
+            
+            // Start background music
+            startMusic();
+            
+            const letterContent = document.getElementById('letterContent');
+            letterContent.innerHTML = '';
+            let index = 0;
+            
+            function typeWriter() {
+                if (index < letterText.length) {
+                    letterContent.innerHTML = letterText.substring(0, index + 1) + '<span class="typing">|</span>';
+                    index++;
+                    setTimeout(typeWriter, 120); // Much slower typing speed for typewriter effect
+                } else {
+                    letterContent.innerHTML = letterText;
+                    setTimeout(() => {
+                        showSlideshow();
+                    }, 2000);
+                }
+            }
+            
+            typeWriter();
+        }
+
+        // 3D Card Flip Function for Slideshow
+        function flipSlideCard(card) {
+            card.classList.toggle('flipped');
+        }
+
+        // Preload images to ensure they're available
+        function preloadImages() {
+            const imageFiles = ['image1.jpg.png.png', 'image2.jpg.png.png', 'image3.jpg.png.png', 'image4.jpg.png.png', 'image5.jpg.png.png'];
+            imageFiles.forEach((src, index) => {
+                const img = new Image();
+                img.onload = function() {
+                    console.log(`Image ${index + 1} loaded successfully: ${src}`);
+                };
+                img.onerror = function() {
+                    console.error(`Failed to load image ${index + 1}: ${src}`);
+                };
+                img.src = src;
+            });
+        }
+
+        // Image handling
+        function showPlaceholder(img, slideNum) {
+            // Only show placeholder if image really failed to load
+            if (img.complete && img.naturalWidth === 0) {
+                const placeholder = document.createElement('div');
+                placeholder.className = 'image-placeholder';
+                placeholder.innerHTML = `
+                    <div style="font-size: 3em; margin-bottom: 20px;">📷</div>
+                    <div>Image ${slideNum} not found</div>
+                    <div style="font-size: 0.8em; margin-top: 10px; opacity: 0.8;">Please add image${slideNum}.jpg.png.png to the folder</div>
+                `;
+                img.parentNode.replaceChild(placeholder, img);
+            }
+        }
+
+        // Verify images on load
+        function verifyImages() {
+            const images = document.querySelectorAll('.slide img');
+            images.forEach((img, index) => {
+                img.onload = function() {
+                    console.log(`Slide ${index + 1} image loaded`);
+                };
+                img.onerror = function() {
+                    console.error(`Slide ${index + 1} image failed to load: ${img.src}`);
+                    showPlaceholder(img, index + 1);
+                };
+                // Force reload if not loaded
+                if (!img.complete || img.naturalWidth === 0) {
+                    const src = img.src;
+                    img.src = '';
+                    setTimeout(() => {
+                        img.src = src;
+                    }, 100);
+                }
+            });
+        }
+
+        // Slideshow
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        document.getElementById('totalSlides').textContent = totalSlides;
+
+        function showSlideshow() {
+            document.getElementById('letterContainer').classList.remove('show');
+            setTimeout(() => {
+                document.getElementById('slideshowContainer').classList.add('show');
+                startSlideshow();
+                // Show outro after slideshow completes
+                setTimeout(() => {
+                    showOutro();
+                }, totalSlides * 4000 + 5000);
+            }, 500);
+        }
+
+        function changeSlide(direction) {
+            // Reset all card flips
+            document.querySelectorAll('.slide-card').forEach(card => {
+                card.classList.remove('flipped');
+            });
+
+            slides[currentSlide].classList.remove('active');
+            currentSlide += direction;
+            
+            if (currentSlide >= totalSlides) {
+                currentSlide = 0;
+            } else if (currentSlide < 0) {
+                currentSlide = totalSlides - 1;
+            }
+            
+            slides[currentSlide].classList.add('active');
+            document.getElementById('slideNumber').textContent = currentSlide + 1;
+        }
+
+        // Auto-advance slideshow
+        let slideInterval;
+        function startSlideshow() {
+            if (slideInterval) clearInterval(slideInterval);
+            slideInterval = setInterval(() => {
+                changeSlide(1);
+            }, 4000);
+        }
+
+        function stopSlideshow() {
+            if (slideInterval) {
+                clearInterval(slideInterval);
+                slideInterval = null;
+            }
+        }
+
+        // Pause auto-advance when user manually navigates
+        function changeSlideWithPause(direction) {
+            stopSlideshow();
+            changeSlide(direction);
+            // Resume after 10 seconds
+            setTimeout(() => {
+                if (document.getElementById('slideshowContainer').classList.contains('show')) {
+                    startSlideshow();
+                }
+            }, 10000);
+        }
+
+        // Show Outro
+        function showOutro() {
+            stopSlideshow();
+            document.getElementById('slideshowContainer').classList.remove('show');
+            setTimeout(() => {
+                document.getElementById('outroContainer').classList.add('show');
+                createOutroHearts();
+            }, 500);
+        }
+
+        // Initialize
+        createParticles();
+        createHearts();
+        createGame();
+        preloadImages();
+        
+        // Verify images when slideshow is shown
+        const originalShowSlideshow = showSlideshow;
+        showSlideshow = function() {
+            originalShowSlideshow();
+            setTimeout(() => {
+                verifyImages();
+            }, 100);
+        };
+    </script>
+</body>
+</html>
